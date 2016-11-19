@@ -75,22 +75,30 @@
                 android:layout_below="@+id/text_view_name"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="0dp"
+                android:textColor="@color/colorListTime"
                 android:layout_toRightOf="@+id/card_view_image"
                 android:text="created this story on 21 October"
                 android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/text_view_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text_view_time_relative"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="3dp"
-                android:layout_toRightOf="@+id/card_view_image"
                 android:text="You're a good tipper...right? Review your tip for Salsa Y Salsa and think about it."
-                android:textSize="12sp" />
-
+                android:textSize="12sp"
+                android:layout_below="@+id/text_view_time_relative"
+                android:layout_alignLeft="@+id/text_view_time_relative"
+                android:layout_alignStart="@+id/text_view_time_relative" />
+             <ImageView
+                 android:id="@+id/image_view_story"
+                 android:layout_width="match_parent"
+                 android:layout_height="200dp"
+                 android:scaleType="centerCrop"
+                 android:layout_marginTop="20dp"
+                 android:layout_below="@+id/text_view_title"
+                 android:src="@drawable/blank_profile_picture"
+                  />
         </RelativeLayout>
 
         <RelativeLayout
@@ -133,7 +141,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:padding="5dp"
-                android:src="@drawable/like_icon_red"
+                android:src="@drawable/like_icon_gray"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
