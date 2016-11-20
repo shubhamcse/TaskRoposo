@@ -7,12 +7,16 @@
         android:label="testing"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<activity android:name=".MainListActivity_">
+<activity android:name=".activities.MainListActivity_">
     <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
     </intent-filter>
 </activity>
+
+        <activity android:name=".activities.DetailsActivity_">
+
+        </activity>
     </application>
 
 </manifest>

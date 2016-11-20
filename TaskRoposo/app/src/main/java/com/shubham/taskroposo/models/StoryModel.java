@@ -1,12 +1,14 @@
-package com.shubham.taskroposo;
+package com.shubham.taskroposo.models;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 /**
  * Created by Shubham Gupta on 18-11-2016.
  */
 
-public class StoryModel {
+public class StoryModel implements Serializable{
 
     @SerializedName("comment_count")
     private String commentCount;

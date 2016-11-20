@@ -1,14 +1,16 @@
-package com.shubham.taskroposo;
+package com.shubham.taskroposo.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.shubham.taskroposo.utils.UtilityClass;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Shubham Gupta on 18-11-2016.
  */
 
-public class UserModel {
+public class UserModel implements Serializable{
 
     private String createdOn;
 
@@ -82,7 +84,7 @@ public class UserModel {
     }
 
     public String getFollowers() {
-        return followers;
+        return UtilityClass.format(Double.parseDouble(followers));
     }
 
     public void setFollowers(String followers) {

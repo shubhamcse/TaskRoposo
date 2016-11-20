@@ -1,12 +1,17 @@
-package com.shubham.taskroposo;
+package com.shubham.taskroposo.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.shubham.taskroposo.R;
+import com.shubham.taskroposo.adapers.ListAdapter;
+import com.shubham.taskroposo.models.StoryModel;
+import com.shubham.taskroposo.models.UserModel;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -32,7 +37,7 @@ public class MainListActivity extends AppCompatActivity implements ListAdapter.O
     List<StoryModel> stories = new ArrayList<>();
     LinearLayoutManager llm;
     ListAdapter listAdapter;
-
+   int REQUEST_CODE_DETAILS = 11;
     @AfterViews
     void init() {
 
@@ -62,7 +67,6 @@ public class MainListActivity extends AppCompatActivity implements ListAdapter.O
                 }
             }
 
-            Log.i("see",""+users.size()+":"+stories.size());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -88,9 +92,26 @@ public class MainListActivity extends AppCompatActivity implements ListAdapter.O
         }
         return json;
     }
-
+   int position;
     @Override
     public void onListItemClicked(int position, View view) {
+        Intent intent = new Intent(MainListActivity.this,DetailsActivity_.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("story", stories.get(position));
+        this.position = position;
+        intent.putExtras(bundle);
+        startActivityForResult(intent,REQUEST_CODE_DETAILS);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK){
+            Boolean is_following = data.getBooleanExtra("is_following",true);
+            stories.get(position).getUser().setIsFollowing(is_following);
+            listAdapter.setStories(stories);
+            listAdapter.notifyDataSetChanged();
+        }
 
     }
 

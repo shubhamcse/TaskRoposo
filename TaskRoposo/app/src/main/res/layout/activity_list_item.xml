@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <RelativeLayout
             android:id="@+id/relative_layout_row"
             android:layout_width="match_parent"
@@ -53,7 +54,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_toLeftOf="@+id/button_follow"
                 android:layout_toRightOf="@+id/card_view_image"
-                android:text="Red riding hood"
+                android:text=""
                 android:textSize="15sp"
                 android:textStyle="bold" />
             <Button
@@ -69,36 +70,55 @@
                 android:text="Follow"/>
 
             <TextView
-                android:id="@+id/text_view_time_relative"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_view_name"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="0dp"
-                android:textColor="@color/colorListTime"
-                android:layout_toRightOf="@+id/card_view_image"
-                android:text="created this story on 21 October"
-                android:textSize="12sp" />
-
-            <TextView
                 android:id="@+id/text_view_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You're a good tipper...right? Review your tip for Salsa Y Salsa and think about it."
+                android:text=""
                 android:textSize="12sp"
+                android:layout_marginBottom="20dp"
+
                 android:layout_below="@+id/text_view_time_relative"
                 android:layout_alignLeft="@+id/text_view_time_relative"
                 android:layout_alignStart="@+id/text_view_time_relative" />
              <ImageView
                  android:id="@+id/image_view_story"
                  android:layout_width="match_parent"
-                 android:layout_height="200dp"
-                 android:scaleType="centerCrop"
-                 android:layout_marginTop="20dp"
+                 android:layout_height="wrap_content"
+                 android:scaleType="fitXY"
+                 android:adjustViewBounds="true"
                  android:layout_below="@+id/text_view_title"
                  android:src="@drawable/blank_profile_picture"
                   />
+            <TextView
+                android:id="@+id/text_view_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textSize="12sp"
+                android:layout_below="@+id/image_view_story"
+                />
+            <TextView
+                android:id="@+id/text_view_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:autoLink="web"
+                android:textSize="12sp"
+                android:layout_below="@+id/text_view_description"
+                />
+
+            <TextView
+                android:id="@+id/text_view_time_relative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorListTime"
+                android:text=""
+                android:textSize="12sp"
+                android:layout_below="@+id/text_view_name"
+                android:layout_alignLeft="@+id/text_view_name"
+                android:layout_alignStart="@+id/text_view_name" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -146,7 +166,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
         </RelativeLayout>
-
     </LinearLayout>
 
 
