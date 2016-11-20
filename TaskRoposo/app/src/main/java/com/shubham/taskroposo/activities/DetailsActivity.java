@@ -144,12 +144,11 @@ public class DetailsActivity extends AppCompatActivity implements ListAdapter.On
     @Override
     public void onFollowButtonClicked(int position) {
        storyModels.get(position).getUser().toggleFollowButton();
-        //  Log.i("see",""+stories.get(position).getUser().getIsFollowing());
-      //  listAdapter.setStories(stories);
+
         listAdapter.notifyDataSetChanged();
         setFollowButton();
 
         setResult(RESULT_OK);
-        RESULT =RESULT_OK;
+        RESULT =  RESULT_OK;
     }
 }

@@ -16,6 +16,7 @@
 
        <android.support.v7.widget.RecyclerView
            android:id="@+id/recycler_view"
+           android:transitionName="@string/activity_list_transition"
            android:layout_width="match_parent"
            android:layout_height="match_parent"/>
     </android.support.v4.widget.NestedScrollView>
@@ -53,6 +54,11 @@
                 app:layout_collapseMode="parallax" />
 
 
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
 
             <LinearLayout
                 android:id="@+id/linear_layout"
@@ -130,13 +136,8 @@
                     android:background="@drawable/follow_button_selector"
                     android:textColor="@drawable/button_pressed_text_color_selector"
                     android:textSize="12dp"
-                    android:text="Follow"/>
+                    android:text="@string/follow"/>
             </LinearLayout>
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 

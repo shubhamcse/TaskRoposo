@@ -49,10 +49,10 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         listViewHolder.mStoryTitle.setText(story.getTitle());
         // listViewHolder.mFollowButton.setPressed((user.getIsFollowing()));
         if (user.getIsFollowing()) {
-            listViewHolder.mFollowButton.setText("Following");
+            listViewHolder.mFollowButton.setText(context.getResources().getString(R.string.following));
             listViewHolder.mFollowButton.setSelected(true);
         } else {
-            listViewHolder.mFollowButton.setText("Follow");
+            listViewHolder.mFollowButton.setText(context.getResources().getString(R.string.follow));
             listViewHolder.mFollowButton.setSelected(false);
         }
         Glide.with(context).load(user.getImage()).centerCrop().placeholder(R.drawable.blank_profile_picture).crossFade().

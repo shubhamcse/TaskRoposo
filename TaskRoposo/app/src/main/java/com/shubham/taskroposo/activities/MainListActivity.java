@@ -2,6 +2,7 @@ package com.shubham.taskroposo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,13 +32,14 @@ import java.util.List;
  */
 @EActivity(R.layout.activity_list)
 public class MainListActivity extends AppCompatActivity implements ListAdapter.OnItemClicked {
-@ViewById(R.id.recycler_view)
+    @ViewById(R.id.recycler_view)
     RecyclerView recyclerView;
 
     List<StoryModel> stories = new ArrayList<>();
     LinearLayoutManager llm;
     ListAdapter listAdapter;
-   int REQUEST_CODE_DETAILS = 11;
+    int REQUEST_CODE_DETAILS = 11;
+
     @AfterViews
     void init() {
 
@@ -45,23 +47,23 @@ public class MainListActivity extends AppCompatActivity implements ListAdapter.O
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
-        String json =  loadJSONFromAsset();
+        String json = loadJSONFromAsset();
 
 
         try {
             JSONArray jsonArray = new JSONArray(json);
-            HashMap<String,UserModel> users = new HashMap<>();
+            HashMap<String, UserModel> users = new HashMap<>();
 
 
-            for(int i=0;i<jsonArray.length();i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Gson gson = new Gson();
 
-                if(jsonObject.isNull("type")){
-                    UserModel userModel = gson.fromJson(jsonObject.toString(),UserModel.class);
-                    users.put(userModel.getId(),userModel);
-                }else{
-                    StoryModel storyModel = gson.fromJson(jsonObject.toString(),StoryModel.class);
+                if (jsonObject.isNull("type")) {
+                    UserModel userModel = gson.fromJson(jsonObject.toString(), UserModel.class);
+                    users.put(userModel.getId(), userModel);
+                } else {
+                    StoryModel storyModel = gson.fromJson(jsonObject.toString(), StoryModel.class);
                     storyModel.setUser(users.get(storyModel.getDb()));
                     stories.add(storyModel);
                 }
@@ -92,22 +94,28 @@ public class MainListActivity extends AppCompatActivity implements ListAdapter.O
         }
         return json;
     }
-   int position;
+
+    int position;
+
     @Override
     public void onListItemClicked(int position, View view) {
-        Intent intent = new Intent(MainListActivity.this,DetailsActivity_.class);
+        Intent intent = new Intent(MainListActivity.this, DetailsActivity_.class);
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this, view, getString(R.string.activity_list_transition));
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("story", stories.get(position));
         this.position = position;
         intent.putExtras(bundle);
-        startActivityForResult(intent,REQUEST_CODE_DETAILS);
+        startActivityForResult(intent, REQUEST_CODE_DETAILS,options.toBundle());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK){
-            Boolean is_following = data.getBooleanExtra("is_following",true);
+        if (requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK) {
+            Boolean is_following = data.getBooleanExtra("is_following", true);
             stories.get(position).getUser().setIsFollowing(is_following);
             listAdapter.setStories(stories);
             listAdapter.notifyDataSetChanged();
@@ -118,10 +126,9 @@ public class MainListActivity extends AppCompatActivity implements ListAdapter.O
     @Override
     public void onFollowButtonClicked(int position) {
         stories.get(position).getUser().toggleFollowButton();
-      //  Log.i("see",""+stories.get(position).getUser().getIsFollowing());
         listAdapter.setStories(stories);
         listAdapter.notifyDataSetChanged();
-       // listAdapter.notifyItemRangeChanged(llm.findFirstVisibleItemPosition(),llm.findLastVisibleItemPosition()-llm.findFirstVisibleItemPosition()+1);
+        // listAdapter.notifyItemRangeChanged(llm.findFirstVisibleItemPosition(),llm.findLastVisibleItemPosition()-llm.findFirstVisibleItemPosition()+1);
 
 
     }
